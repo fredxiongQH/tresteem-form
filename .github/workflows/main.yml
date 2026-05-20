@@ -1,14 +1,12 @@
 name: Deploy
-
 on: [push, workflow_dispatch]
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Deploy
-        run: npx wrangler deploy --prod
+        run: npx wrangler deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: '255c8e7e71ee4559a1e24f97663610b5'
