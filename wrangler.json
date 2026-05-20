@@ -1,0 +1,16 @@
+{
+	"compatibility_date": "2025-10-08",
+	"main": "src/index.ts",
+	"name": "tresteem-form",
+	"upload_source_maps": true,
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_id": "801e86c2-a408-4ede-b634-712aead40fc6",
+			"database_name": "tresteem-form-db"
+		}
+	],
+	"observability": {
+		"enabled": true
+	}
+}
