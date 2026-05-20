@@ -5,18 +5,25 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+env:
+  NODE_VERSION: '24'
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      
       - name: Install wrangler
-        run: npm install -g wrangler
+        run: npm install -g wrangler@latest
       
       - name: Deploy to Cloudflare
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: '255c8e7e71ee4559a1e24f97663610b5'
-          wranglerVersion: '3.93.0'
+        run: wrangler deploy --prod
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: '255c8e7e71ee4559a1e24f97663610b5'
